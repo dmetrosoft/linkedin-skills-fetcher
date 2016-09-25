@@ -24,7 +24,7 @@ level2 var name is middle
 level3 variable name is middle1
 level4 var name is end
 if you want to crawl out skills that begins with a-z, then only level1 should be set, the rest should be empty,
-if you want aa -zz only level1 and level2 should be set, if you want aaa-zzz only level1, level2 should be set, e.t.c.
+if you want aa -zz only level1 and level2 should be set, if you want aaa-zzz only level1, level2 and level3 should be set, e.t.c.
 #After Fetching 
 you can run the workerget.php from a web server
 which will do his work and save the new skill in php
