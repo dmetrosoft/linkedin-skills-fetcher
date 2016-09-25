@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+ <script src="jquery.min.js"></script>
+
+
+<body >From(1-26 represent a-z)
+<label>Level 1</lavel>
+<input type="text" value="" id="start">
+<label>Lavel 2</label>
+<input type="text" value="" id="middle">
+<label>Level 3</label>
+<input type="text" value="" id="middle1">
+<label>Level 4</label>
+<input type="text" value="" id="end">
+<button id="querry">start</button>
+<button id="clear">clear</button>
+<h1 id="counter"></h1>
+<p id="body">emma</p>
+<script>
+	/*
+var jqxhr = $.getJSON( "https://www.linkedin.com/ta/skill?query=b", function() {
+  console.log( "success" );
+})
+  .done(function() {
+    console.log( "second success" );
+  })
+  .fail(function() {
+    console.log( "error" );
+  })
+  .always(function() {
+    console.log( "complete" );
+  });
+ 
+// Perform other work here ...
+ 
+// Set another completion function for the request above
+jqxhr.complete(function() {
+  console.log( "second complete" );
+});
+*/
+/*
+$.ajax({
+    url: "https://www.linkedin.com/ta/skill?query=b",
+
+    dataType: "jsonp",
+ jsonpCallback: "res"
+
+});
+function res(msg) {
+alert(msg.message)
+ }for(var x=0;x<alphabet.length;)
+{
+	//alert(alphabet[x])
+x++
+}
+var b=2;
+var c=3;
+var d=4;
+var e=5;
+var f=6;
+var g=7;var h=8;var i=9;var j=10;var k=11;var l=12;var m=13;var n=14;var o=15;var p=16;var q=17;var r=18;var s=19;var t=20;var u=21;var v=22;var w=23;var x=24;var y=25;var w=26;
+	*/
+	//
+	
+	$("#querry").click(function(e) {
+	$("#clear").click(function(e) {
+	 clearInterval(inter);
+	})	
+var alphabet = "3abcdefghijklmnopqrstuvwxyz".split("");
+var end=$("#end").val();
+var middle=$("#middle").val();
+var middle1=$("#middle1").val();
+var start=$("#start").val();
+var inter=setInterval(function(){
+if(end!=''){
+	var vcv=copier(alphabet[start]+alphabet[middle]+alphabet[middle1]+alphabet[end])
+	$("#counter").html(alphabet[start]+alphabet[middle]+alphabet[middle1]+alphabet[end]);
+	
+	 if(alphabet[start]=='z' && alphabet[middle]=='y'&& alphabet[middle1]=='y'&& alphabet[end]=='y'){
+		// alphabet[start]='z';
+		//c++;end=0;v=0;
+		clearInterval(inter);$("#counter").append('Done');
+	}
+	else{
+		if(alphabet[end]=='z'){
+		middle1++;end=0;
+		//clearInterval(inter);$("#counter").append('Done');
+	}
+	 if(alphabet[middle]=='z'){
+		start++;end=0;middle=1;
+		//clearInterval(inter);$("#counter").append('Done');
+	}
+	 if(alphabet[middle1]=='z'){
+		end=1;middle++;middle1=1
+		//clearInterval(inter);$("#counter").append('Done');
+	}
+	}
+	if(vcv=='success'){end++;}
+		}
+else if(middle!='' && middle1=='' ){
+	var vcv=copier(alphabet[start]+alphabet[middle])
+	$("#counter").html(alphabet[start]+alphabet[middle]);
+	if(alphabet[middle]=='z'){
+		start++;middle=1;;
+		//clearInterval(inter);$("#counter").append('Done');
+	}
+	if(alphabet[start]=='z' && alphabet[middle]=='y')
+	{clearInterval(inter);$("#counter").append('Done')}
+	//var incree=incre()
+if(vcv=='success'){middle++;}
+}
+else if(middle1!='' && end==''){
+	var vcv=copier(alphabet[start]+alphabet[middle]+alphabet[middle1])
+	$("#counter").html(alphabet[start]+alphabet[middle]+alphabet[middle1]);
+	if(alphabet[middle1]=='z'){
+		middle++;middle1=0;
+		//clearInterval(inter);$("#counter").append('Done');
+	}
+	 if(alphabet[middle]=='z'){
+		start++;middle=0;middle1=1;
+		//clearInterval(inter);$("#counter").append('Done');
+	}
+	if(alphabet[start]=='z' && alphabet[middle]=='y'&& alphabet[middle1]=='y')
+	{clearInterval(inter);$("#counter").append('Done')}
+	//var incree=incre()
+if(vcv=='success'){middle1++;}
+}
+else if(start!=''){var vcv=copier(alphabet[start])
+	$("#counter").html(alphabet[start]);
+	if(alphabet[start]=='z')
+	{clearInterval(inter);$("#counter").append('&nbsp; Done')}
+	//var incree=incre()
+if(vcv=='success'){start++;}
+	}	
+//copier(alphabet[x]+alphabet[x])
+//$("#counter").html(alphabet[x]+alphabet[y]);
+	 },
+	 //determines fetching spped
+	 5000);
+});
+
+
+ function copier(string)
+ { var string=string;
+        $.ajax({
+            url: 'https://www.linkedin.com/ta/skill?query='+string,
+            dataType: 'jsonp',
+            jsonp: 'callback',
+            jsonpCallback: 'jsonpCallback',
+            success: function(){
+            
+            }
+    });
+	 return "success";
+ }
+ 
+ 
+function jsonpCallback(data){
+ $.each(data, function (i, item) {
+	 var worker=JSON.stringify(item);
+	 if(worker=='[]'){}
+	 else{
+	$.ajax({ 
+ 				type: "POST",
+                url: "worker.php",
+			//dataType: 'json',
+                 data: {worker:worker, cache:false},
+                 success: function(data)
+				{
+				 },
+		 error: function(data){alert("error")}
+});	
+
+	$("#body").html((JSON.stringify(item)));
+	 }
+    });
+	
+	}
+
+</script>
+
+</body>
+</html>
